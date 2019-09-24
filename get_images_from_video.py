@@ -1,3 +1,4 @@
+# refered to https://stackoverflow.com/questions/22704936/reading-every-nth-frame-from-videocapture-in-opencv/36961408
 import numpy as np
 import cv2
 
