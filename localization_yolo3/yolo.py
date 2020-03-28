@@ -185,6 +185,7 @@ def detect_video(yolo, video_path, output_path=""):
         out = cv2.VideoWriter(output_path, video_FourCC, video_fps, video_size)
     accum_time = 0
     curr_fps = 0
+    count = 0
     fps = "FPS: ??"
     prev_time = timer()
     while True:
@@ -203,10 +204,13 @@ def detect_video(yolo, video_path, output_path=""):
             curr_fps = 0
         cv2.putText(result, text=fps, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
                     fontScale=0.50, color=(255, 0, 0), thickness=2)
-        cv2.namedWindow("result", cv2.WINDOW_NORMAL)
-        cv2.imshow("result", result)
+        #cv2.namedWindow("result", cv2.WINDOW_NORMAL)
+        #cv2.imshow("result", result)
         if isOutput:
             out.write(result)
+            count = count + 1
+        if count == 1000:
+            break
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     yolo.close_session()
